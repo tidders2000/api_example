@@ -10,17 +10,41 @@ app.config["MONGO_DBNAME"] = 'leMans'
 mongo = PyMongo(app)
 
 @app.route('/')
-@app.route('/winners')
-def get_tasks():
-    return render_template("winners.html", 
-                           winners=mongo.db.winners.find())
+
+def inst():
+    return render_template("winners.html")
+
+
                            
 @app.route('/api/v1/resources/winners/all', methods=['GET'])
 def api_all():
     winners=dumps(mongo.db.winners.find())
     
     return jsonify(winners)
+
+@app.route('/api/v1/resources/winners', methods=['GET'])
+def api_filter():
+    query_parameters = request.args
+    search_var={}
+    year = query_parameters.get('year')
+    team = query_parameters.get('team')
+    car = query_parameters.get('car')
+    drivers=query_parameters.get('driver')
     
+    if year:
+       search_var.update( {'year' : year} )
+    if team:
+       search_var.update( {'team' : team} )
+    if car:
+       search_var.update( {'car' : car} )
+    if drivers:
+       
+       search_var.update( {'drivers' : drivers} )
+
+    winners=dumps(mongo.db.winners.find(search_var))
+    
+
+    return jsonify(winners)
 if __name__=='__main__':
     
     app.run(host=os.environ.get('IP'),

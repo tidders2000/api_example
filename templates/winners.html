@@ -1,11 +1,30 @@
 
 <div class="row">
-    <h1>winners</h1>
+    <h1>Le Mans Winners API</h1>
     
-        {% for winner in winners %}
-          <p>{{winner.team}} - {{winner.car}} -{{winner.drivers}}</p>
-         
-        {% endfor %}
+    <p>
+        This is a very basic API covering Le Mans winners by year and was built as an exercise to build an API in Flask
+        The database contains the following information:
+            <ul>
+                <li>Year</li>
+                <li>Team</li>
+                <li>Car</li>
+                <li>Drivers</li>
+                <li>Laps</li>
+                <li>Distance</li>
+            </ul>
+    
+    
+    </p>
+    To access the api add  /api/v1/resources/winners to the URL. This will bring back everything
+    You can filter on the following headings: Team,Year, Car and Drivers. So to search by year and driver
+    
+     /api/v1/resources/winners?year=2018&driver=Fernando%20Alonso
+    
+    <p>
+        
+        
+    </p>
 
-    </ul>
+  
 </div>
