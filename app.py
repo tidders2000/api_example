@@ -12,7 +12,7 @@ mongo = PyMongo(app)
 @app.route('/')
 
 def inst():
-    return render_template("winners.html")
+    return render_template("index.html")
 
 
                            
